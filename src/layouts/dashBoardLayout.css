@@ -1,0 +1,97 @@
+#dashBoardLayout {
+  display: flex;
+  width: 100%;
+  position: relative;
+  min-height: 100vh;
+}
+.dashBoardSideBar {
+  width: 300px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background-color: white;
+  z-index: 20;
+  border-right: 2px solid gainsboro;
+}
+.dashBoardMain {
+  width: 100%;
+  margin-left: 300px;
+  padding: 20px;
+  position: relative;
+}
+.dash-hamburger,
+.dash-hamburger2 {
+  cursor: pointer;
+  color: black;
+  display: none;
+}
+.popup-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 30;
+}
+.applicationList-popup {
+  position: absolute;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 6px;
+  width: 80%;
+  /* border: 1px solid gainsboro; */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+/* dark theme */
+#dark .dashBoardSideBar {
+  background-color: #101828;
+}
+#dark .menu li a {
+  color: white;
+}
+#dark #dashBoardLayout {
+  background-color: #101828;
+}
+#dark .applicationList-popup {
+  background-color: #101828;
+  /* border: 1px solid rgba(220, 220, 220, 0.5); */
+}
+/* dark theme */
+/* Responsive part */
+@media only screen and (max-width: 992px) {
+  .dashBoardSideBar {
+    transform: translateX(-100%);
+  }
+  .dashBoardMain {
+    margin-left: 0;
+  }
+  .dash-hamburger,
+  .dash-hamburger2 {
+    display: block;
+  }
+  .applicationList-popup {
+    width: 90%;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .dashBoardSideBar {
+    transform: translateX(-100%);
+  }
+  .dashBoardMain {
+    margin-left: 0;
+  }
+  .dash-hamburger,
+  .dash-hamburger2 {
+    display: block;
+  }
+  .applicationList-popup {
+    width: 90%;
+  }
+}

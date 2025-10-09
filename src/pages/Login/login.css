@@ -1,0 +1,73 @@
+main {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+main form {
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  border: 1px solid gainsboro;
+  width: 30%;
+  min-height: 30vh;
+  padding: 50px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  gap: 20px;
+}
+.formElement {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+main {
+  margin-top: 50px;
+}
+main form input {
+  border: 1px solid gainsboro;
+  border-radius: 3px;
+  padding: 8px 10px;
+  outline: none;
+  width: 100%;
+}
+
+main form button {
+  background-color: #228b22;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  padding: 8px 10px;
+  border-radius: 5px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.logo {
+  height: 30px;
+  margin-right: 50px;
+}
+/* Responsive part */
+@media only screen and (max-width: 1300px) {
+  main form {
+    width: 50%;
+    padding: 20px;
+  }
+}
+@media only screen and (max-width: 992px) {
+  main form {
+    width: 70%;
+    padding: 20px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  main form {
+    width: 90%;
+    padding: 20px;
+  }
+}

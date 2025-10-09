@@ -1,0 +1,16 @@
+.proIdsStyle {
+  background-color: green;
+  font-size: 14px;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  justify-content: center;
+}
+.proIdsContainer {
+  display: flex;
+  gap: 5px;
+}

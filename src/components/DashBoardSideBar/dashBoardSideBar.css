@@ -1,0 +1,57 @@
+.dash-logo {
+  height: 40px;
+  object-fit: cover;
+  margin: 0 auto;
+}
+.menu {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.menu ul {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.menu ul li {
+  /* padding: 8px 10px; */
+  border-radius: 3px;
+}
+.menu ul li a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s;
+  font-size: 16px;
+  padding: 8px 10px;
+}
+.menu ul li:hover {
+  transition: all 0.2s;
+  background-color: #228b222d;
+}
+.active {
+  background-color: #228b222d;
+}
+.menu ul li:hover a {
+  color: #228b22;
+}
+.hide {
+  transition: transform 0.5s;
+  transform: translateX(-100%);
+}
+.show {
+  transition: transform 0.5s;
+  transform: translateX(0);
+}
+.inventoryInnerLinks {
+  font-size: 15px;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+.inventoryInnerLinks li {
+  /* padding-right: 5px !important; */
+  margin-bottom: 0;
+  color: rgb(74, 85, 104);
+  cursor: pointer;
+}

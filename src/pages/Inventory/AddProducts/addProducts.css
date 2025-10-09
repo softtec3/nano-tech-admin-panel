@@ -1,0 +1,88 @@
+.addProductFormPopUp {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 20;
+}
+#addProduct {
+  position: absolute;
+  width: 50%;
+  border-radius: 5px;
+  padding: 20px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  height: 70vh;
+  overflow-y: scroll;
+}
+#addProduct h3 {
+  text-align: center;
+}
+.addProductForm {
+  width: 100%;
+  border: 1px solid gainsboro;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 5px;
+}
+.addProductForm > div {
+  margin-bottom: 15px;
+}
+.productFormElement {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+.productFormElement label {
+  font-size: 15px;
+}
+.productFormElement input,
+textarea,
+select {
+  padding: 8px 10px;
+  border: none;
+  outline: none;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  width: 100%;
+}
+.productFormElement textarea {
+  height: 200px;
+  resize: none;
+}
+.formElementFlex {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: space-between;
+}
+.productFormElement img {
+  height: 300px;
+  object-fit: contain;
+  border-radius: 5px;
+}
+#addProductForm input::placeholder {
+  color: black;
+}
+/* Responsive part */
+@media only screen and (max-width: 992px) {
+  #addProduct {
+    width: 90%;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .addProductForm {
+    width: 100%;
+  }
+  .formElementFlex {
+    flex-direction: column;
+  }
+  #addProduct {
+    width: 90%;
+  }
+}

@@ -1,0 +1,32 @@
+.qrGeneratorFormContainer {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.qrCodesTable {
+  margin-left: 20px;
+  padding: 5px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  height: 100%;
+}
+.contentRef {
+  padding: 20px;
+}
+.contentRef p {
+  background-color: black;
+  color: white;
+  padding: 5px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+.qrCodesTable button {
+  margin-top: 10px;
+}

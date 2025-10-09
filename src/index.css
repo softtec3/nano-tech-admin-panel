@@ -1,0 +1,150 @@
+/* Defaults */
+/* google fonts */
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+ul li {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+  color: rgb(74, 85, 104);
+}
+p {
+  color: rgb(74, 85, 104);
+}
+.base-color {
+  color: #228b22;
+}
+.shadow {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+/* color code: #228b22 */
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.global-width {
+  margin: 0 auto;
+  max-width: 65%;
+}
+section {
+  padding: 2rem 2rem;
+}
+h1 {
+  font-size: 3rem !important; /* ~48px */
+}
+
+h2 {
+  font-size: 2.25rem !important; /* ~36px */
+}
+
+h3 {
+  font-size: 1.75rem !important; /* ~28px */
+}
+h4 {
+  font-size: 1.5rem !important; /* ~24px */
+}
+/* Theme Toggler */
+
+/* Responsive part */
+@media only screen and (max-width: 992px) {
+  .global-width {
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 20px;
+  }
+  main form {
+    width: 100%;
+  }
+  h1 {
+    font-size: 2.5rem !important; /* ~40px */
+  }
+
+  h2 {
+    font-size: 2rem !important; /* ~32px */
+  }
+
+  h3 {
+    font-size: 1.5rem !important; /* ~24px */
+  }
+  h4 {
+    font-size: 1.25rem !important; /* ~24px */
+  }
+  section {
+    padding: 2rem;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .global-width {
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 20px;
+  }
+  h1 {
+    font-size: 2rem !important; /* ~32px */
+  }
+
+  h2 {
+    font-size: 1.5rem !important; /* ~24px */
+  }
+
+  h3 {
+    font-size: 1.25rem !important; /* ~20px */
+  }
+  h4 {
+    font-size: 1.125rem !important; /* ~18px */
+  }
+  section {
+    padding: 2rem 0;
+  }
+  p {
+    font-size: 14px;
+  }
+}
+.btn {
+  color: white;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  background-color: #228b22;
+  position: relative;
+  transition: transform 0.2s;
+  padding: 10px 16px;
+  border-radius: 5px;
+  font-weight: 600;
+  transform: translateY(0);
+  transition: transform 0.2s;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s;
+  background-color: #126d12;
+}
+
+/* overflow */
+/* width */
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

@@ -1,0 +1,8 @@
+.ordersTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ordersTop select {
+  width: auto;
+}

@@ -1,0 +1,32 @@
+#dashboardTop {
+  padding: 20px;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: white;
+  z-index: 10;
+}
+#dashboardTop .flex {
+  gap: 20px;
+}
+.hamburger {
+  visibility: hidden;
+}
+
+/* Responsive part */
+@media only screen and (max-width: 992px) {
+  .hamburger {
+    visibility: visible;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .hamburger {
+    visibility: visible;
+  }
+}

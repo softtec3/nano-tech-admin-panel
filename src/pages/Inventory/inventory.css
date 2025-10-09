@@ -1,0 +1,48 @@
+.inventory-tabs {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  border-bottom: 1px solid gainsboro;
+}
+.inventory-tabs span {
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+}
+.inventory-tabs span:hover {
+  transition: all 0.2s;
+  background-color: #228b22;
+  color: white;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+.tabStyle {
+  background-color: #228b22;
+  color: white;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  font-size: 15px !important;
+}
+
+.mainInventorySection {
+  margin-top: 20px;
+}
+#viewProducts {
+  width: 100%;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+/* Responsive part */
+@media only screen and (max-width: 992px) {
+  #viewProducts {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media only screen and (max-width: 600px) {
+  #viewProducts {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

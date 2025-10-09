@@ -1,0 +1,17 @@
+.dateIdTable {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+#formModal {
+  width: 90%;
+  margin: 0 auto;
+}
+.dateApplication {
+  width: 100%;
+}
+.dateDiv span {
+  border: 1px solid gainsboro;
+  padding: 5px;
+  font-size: 12px;
+}

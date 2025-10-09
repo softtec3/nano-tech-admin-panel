@@ -1,0 +1,92 @@
+.dashboard-container {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.dashSummaryTable table {
+  width: auto;
+  table-layout: auto;
+  min-width: 500px;
+}
+.dashboard-container > div:nth-child(1) {
+  padding: 20px;
+  border: 1px solid gainsboro;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  width: 100%;
+  overflow-x: auto;
+}
+.dashboard-container > div:nth-child(2) {
+  background-color: green;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  border-radius: 5px;
+}
+.dashboard-container > div:nth-child(3) {
+  background-color: skyblue;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  height: 400px;
+  padding: 20px;
+  border-radius: 5px;
+}
+.dashboard-container > div:nth-child(4) {
+  background-color: orange;
+  height: 400px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  border-radius: 5px;
+}
+.summary-first {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dashboard-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+.dashboard-container table th,
+td {
+  padding: 8px !important;
+  text-align: center;
+  border: 1px solid gainsboro;
+}
+.dashboard-container table th {
+  font-size: 15px;
+}
+.dashboard-container table td {
+  font-size: 14px;
+}
+/* dark theme */
+#dark #dashboard h2 {
+  color: white;
+}
+#dark .dashSummaryTable {
+  color: white;
+}
+#dark .dashboard-container > div:nth-child(1) {
+  border: 1px solid rgba(220, 220, 220, 0.5);
+}
+#dark .dashboard-container table th,
+td {
+  border: 1px solid rgba(220, 220, 220, 0.5);
+}
+/* dark theme */
+/* Responsive part */
+@media only screen and (max-width: 992px) {
+  .dashboard-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media only screen and (max-width: 600px) {
+  .dashboard-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
