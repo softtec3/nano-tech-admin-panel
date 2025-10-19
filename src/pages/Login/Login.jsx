@@ -1,23 +1,23 @@
 import React from "react";
 import "./login.css";
 import { getFormData } from "../../utils/getFormData";
-import { useNavigate } from "react-router";
 import { Bounce, toast, ToastContainer } from "react-toastify";
+import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router";
 const Login = () => {
+  const { loginUser, setUser, user, isLoading } = useAuth();
+  console.log(user);
+  console.log(isLoading);
   const navigate = useNavigate();
   // form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     const formdata = getFormData(e.target);
-    fetch(`${import.meta.env.VITE_API}/login.php`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formdata),
-    })
+    loginUser(formdata)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          console.log(data);
+          setUser(data?.data);
           navigate("/dashboard");
         } else {
           toast.error(data.message);

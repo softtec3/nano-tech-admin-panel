@@ -25,19 +25,6 @@ const DashBoardLayout = () => {
   return (
     // dashboard layout
     <div id="dashBoardLayout">
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        transition={Bounce}
-      />
       {/* dashboard sidebar */}
       <div className={`dashBoardSideBar ${isTrue ? "hide" : "show"}`}>
         <div className="dash-hamburger2">

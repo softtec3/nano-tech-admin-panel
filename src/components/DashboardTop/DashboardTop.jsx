@@ -2,13 +2,32 @@ import React, { useEffect, useState } from "react";
 import "./dashboardTop.css";
 import { FaXmark } from "react-icons/fa6";
 import { FaBars } from "react-icons/fa";
+import useAuth from "../../hooks/useAuth";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 const DashboardTop = ({ setIsTrue }) => {
+  const { logoutUser, setUser, setIsLoading } = useAuth();
   const [formattedDate, setFormattedDate] = useState("");
   const today = new Date();
   const day = String(today.getDate()).padStart(2, "0");
   const month = String(today.getMonth() + 1).padStart(2, "0"); // Months are 0-based
   const year = today.getFullYear();
   const formattedDate2 = `${day}-${month}-${year}`;
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    logoutUser()
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          toast.success(data.message);
+          setUser(null);
+          setIsLoading(false);
+          navigate("/");
+        }
+      })
+      .catch((error) => console.log(error.message));
+  };
+
   useEffect(() => {
     const interVal = setInterval(() => {
       setFormattedDate(new Date().toLocaleString().split(","));
@@ -35,7 +54,9 @@ const DashboardTop = ({ setIsTrue }) => {
           <p>Date: {formattedDate2}</p>
           <p>Time: {formattedDate[1]}</p>
         </div>
-        <button className="btn">Logout</button>
+        <button onClick={handleLogout} className="btn">
+          Logout
+        </button>
       </div>
       {/* time, date and logout button */}
     </div>

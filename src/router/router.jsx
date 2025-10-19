@@ -13,6 +13,7 @@ import CreateWarehouse from "../pages/CreateWarehouse/CreateWarehouse";
 import CreatePost from "../pages/CreatePost/CreatePost";
 import CreateReel from "../pages/CreateReel/CreateReel";
 import Comments from "../pages/Comments/Comments";
+import PrivateRoute from "../routes/PrivateRoute";
 // all routes
 export const router = createBrowserRouter([
   {
@@ -21,7 +22,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    Component: DashBoardLayout,
+    element: (
+      <PrivateRoute>
+        <DashBoardLayout />
+      </PrivateRoute>
+    ),
     children: [
       { index: true, Component: Dashboard },
       { path: "e-commerce", Component: Inventory },
