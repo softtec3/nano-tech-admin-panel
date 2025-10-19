@@ -18,7 +18,11 @@ const Login = () => {
       .then((data) => {
         if (data.success) {
           setUser(data?.data);
-          navigate("/dashboard");
+          if (data.data.logged_user_role != "admin") {
+            toast.error("Access denied. Only admin have access!");
+          } else {
+            navigate("/dashboard");
+          }
         } else {
           toast.error(data.message);
         }
@@ -54,7 +58,7 @@ const Login = () => {
             Password <span style={{ color: "red" }}>*</span>
           </label>
           <input
-            type="text"
+            type="password"
             name="password"
             placeholder="Enter Password"
             required

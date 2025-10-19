@@ -27,7 +27,7 @@ const DashBoardSideBar = ({
     <div>
       {/* logo */}
       <div className="flex">
-        <Link to={"/"}>
+        <Link to={"/dashboard"}>
           <img className="dash-logo" src="/logo.png" alt="NanoTech Logo" />
         </Link>
       </div>

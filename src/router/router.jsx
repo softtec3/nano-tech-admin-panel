@@ -13,7 +13,8 @@ import CreateWarehouse from "../pages/CreateWarehouse/CreateWarehouse";
 import CreatePost from "../pages/CreatePost/CreatePost";
 import CreateReel from "../pages/CreateReel/CreateReel";
 import Comments from "../pages/Comments/Comments";
-import PrivateRoute from "../routes/PrivateRoute";
+import AdminRoute from "../routes/AdminRoute";
+import Forbidden from "../pages/Forbidden/Forbidden";
 // all routes
 export const router = createBrowserRouter([
   {
@@ -21,11 +22,15 @@ export const router = createBrowserRouter([
     Component: Login,
   },
   {
+    path: "/forbidden",
+    Component: Forbidden,
+  },
+  {
     path: "/dashboard",
     element: (
-      <PrivateRoute>
+      <AdminRoute>
         <DashBoardLayout />
-      </PrivateRoute>
+      </AdminRoute>
     ),
     children: [
       { index: true, Component: Dashboard },
