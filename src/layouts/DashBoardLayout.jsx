@@ -5,6 +5,7 @@ import DashBoardSideBar from "../components/DashBoardSideBar/DashBoardSideBar";
 import { FaBars, FaXmark } from "react-icons/fa6";
 import ApplicationList from "../pages/Dashboard/ApplicationList/ApplicationList";
 import DashboardTop from "../components/DashboardTop/DashboardTop";
+import { Bounce, ToastContainer } from "react-toastify";
 const DashBoardLayout = () => {
   const [isTrue, setIsTrue] = useState(false);
   const [isModal, setIsModal] = useState(false);
@@ -24,6 +25,19 @@ const DashBoardLayout = () => {
   return (
     // dashboard layout
     <div id="dashBoardLayout">
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
       {/* dashboard sidebar */}
       <div className={`dashBoardSideBar ${isTrue ? "hide" : "show"}`}>
         <div className="dash-hamburger2">
