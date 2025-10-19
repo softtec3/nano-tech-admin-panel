@@ -3,6 +3,7 @@ import "./createRole.css";
 import { toast } from "react-toastify";
 const CreateRole = () => {
   const [passError, setPassError] = useState("");
+  // Form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -27,6 +28,7 @@ const CreateRole = () => {
           }
         })
         .catch((e) => console.log(e));
+      e.target.reset();
     }
   };
   return (
