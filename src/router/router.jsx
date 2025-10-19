@@ -15,6 +15,7 @@ import CreateReel from "../pages/CreateReel/CreateReel";
 import Comments from "../pages/Comments/Comments";
 import AdminRoute from "../routes/AdminRoute";
 import Forbidden from "../pages/Forbidden/Forbidden";
+import Categories from "../pages/Categories/Categories";
 // all routes
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,7 @@ export const router = createBrowserRouter([
       { index: true, Component: Dashboard },
       { path: "e-commerce", Component: Inventory },
       { path: "orders", Component: Orders },
+      { path: "categories", Component: Categories },
       { path: "createRole", Component: CreateRole },
       { path: "warehouse", Component: CreateWarehouse },
       { path: "productManagement", Component: ProductManagement },

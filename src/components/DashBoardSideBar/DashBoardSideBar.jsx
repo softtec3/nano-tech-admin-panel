@@ -83,9 +83,18 @@ const DashBoardSideBar = ({
                   e.stopPropagation();
                 }}
               >
-                <NavLink to={"Orders"} end>
+                <NavLink to={"orders"} end>
                   {" "}
                   Orders
+                </NavLink>
+              </li>
+              <li
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
+                <NavLink to={"categories"} end>
+                  Create Category
                 </NavLink>
               </li>
             </ul>
