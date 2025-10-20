@@ -10,7 +10,7 @@
 .warehouseContainer select {
   width: auto;
 }
-#warehouseContainerModal {
+.warehouseContainerModal {
   position: fixed;
   width: 100%;
   height: 100vh;
@@ -23,13 +23,13 @@
   background-color: rgba(0, 0, 0, 0.39);
   margin-left: 10%;
 }
-#warehouseContainerModal main {
-  width: 80%;
+.warehouseContainerModal main {
+  width: 100%;
 }
-#warehouseContainerModal main form {
+.warehouseContainerModal main form {
   position: relative;
 }
-#warehouseContainerModal main form .cross {
+.warehouseContainerModal main form .cross {
   position: absolute;
   right: 5px;
   top: 5px;
@@ -44,4 +44,9 @@
   position: sticky;
   left: 0;
   top: 0;
+}
+.warButtons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
