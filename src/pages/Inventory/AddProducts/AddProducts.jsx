@@ -21,6 +21,7 @@ const AddProducts = ({ setActive }) => {
       fetch(`${import.meta.env.VITE_API}/add_product.php`, {
         method: "POST",
         body: form,
+        credentials: "include",
       })
         .then((res) => res.json())
         .then((data) => {

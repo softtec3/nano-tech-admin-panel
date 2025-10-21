@@ -22,10 +22,12 @@ const CreateWarehouse = () => {
       fetch(`${import.meta.env.VITE_API}/create_warehouse.php`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify(formData),
       })
         .then((res) => res.json())
         .then((data) => {
+          console.log(data);
           if (data?.success) {
             toast.success(data?.message);
           } else {
@@ -68,6 +70,7 @@ const CreateWarehouse = () => {
       fetch(`${import.meta.env.VITE_API}/create_warehouse_section.php`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify(formData),
       })
         .then((res) => res.json())
@@ -120,6 +123,7 @@ const CreateWarehouse = () => {
       fetch(`${import.meta.env.VITE_API}/create_warehouse_sub_section.php`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify(formData),
       })
         .then((res) => res.json())

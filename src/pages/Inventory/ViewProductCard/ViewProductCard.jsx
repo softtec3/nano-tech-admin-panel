@@ -212,9 +212,7 @@ const ViewProductCard = ({ product, handleDelete, getAllProducts }) => {
         {/* product image */}
         <div className="card-image">
           <img
-            src={`${import.meta.env.VITE_API}/uploads/products/${
-              product["product_main_img"]
-            }`}
+            src={`${import.meta.env.VITE_API}/${product["product_main_img"]}`}
             alt="product title"
           />
         </div>
@@ -583,7 +581,7 @@ const ViewProductCard = ({ product, handleDelete, getAllProducts }) => {
                     <input
                       type="hidden"
                       name="pro_main_img"
-                      value={product?.product_main_img}
+                      value={product?.product_main_img ?? ""}
                     />
                   </div>
                 </div>
@@ -597,7 +595,7 @@ const ViewProductCard = ({ product, handleDelete, getAllProducts }) => {
                     <input
                       type="hidden"
                       name="pro_img_one"
-                      value={product?.product_img_one}
+                      value={product?.product_img_one ?? ""}
                     />
                   </div>
                   <div className="productFormElement">
@@ -608,7 +606,7 @@ const ViewProductCard = ({ product, handleDelete, getAllProducts }) => {
                     <input
                       type="hidden"
                       name="pro_img_two"
-                      value={product?.product_img_two}
+                      value={product?.product_img_two ?? ""}
                     />
                   </div>
                 </div>
@@ -622,7 +620,7 @@ const ViewProductCard = ({ product, handleDelete, getAllProducts }) => {
                     <input
                       type="hidden"
                       name="pro_img_three"
-                      value={product?.product_img_three}
+                      value={product?.product_img_three ?? ""}
                     />
                   </div>
                   <div className="productFormElement">
@@ -633,7 +631,7 @@ const ViewProductCard = ({ product, handleDelete, getAllProducts }) => {
                     <input
                       type="hidden"
                       name="pro_img_four"
-                      value={product?.product_img_four}
+                      value={product?.product_img_four ?? ""}
                     />
                   </div>
                 </div>

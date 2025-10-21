@@ -16,6 +16,7 @@ const CreateRole = () => {
       fetch(`${import.meta.env.VITE_API}/create_user.php`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify(data),
       })
         .then((res) => res.json())

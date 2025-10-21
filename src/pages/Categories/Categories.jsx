@@ -17,6 +17,7 @@ const Categories = () => {
       fetch(`${import.meta.env.VITE_API}/create_category.php`, {
         method: "POST",
         body: formData,
+        credentials: "include",
       })
         .then((res) => res.json())
         .then((data) => {
@@ -73,6 +74,7 @@ const Categories = () => {
       fetch(`${import.meta.env.VITE_API}/create_sub_category.php`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify(formdata),
       })
         .then((res) => res.json())

@@ -24,7 +24,10 @@ const Inventory = () => {
           fetch(
             `${
               import.meta.env.VITE_API
-            }/delete_product_by_id.php?delete_id=${id}`
+            }/delete_product_by_id.php?delete_id=${id}`,
+            {
+              credentials: "include",
+            }
           )
             .then((res) => res.json())
             .then((data) => {
