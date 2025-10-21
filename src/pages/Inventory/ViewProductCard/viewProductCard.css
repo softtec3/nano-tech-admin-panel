@@ -53,9 +53,7 @@
   display: block;
 }
 #updateProductForm {
-  border: 1px solid gainsboro;
   border-radius: 5px;
-  padding: 20px;
 }
 #updateProductForm .formElementFlex,
 .productFormElement {

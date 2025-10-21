@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./inventory.css";
 import ViewProductCard from "./ViewProductCard/ViewProductCard";
 import { useOutletContext } from "react-router";

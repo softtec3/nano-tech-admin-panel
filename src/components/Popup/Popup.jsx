@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./popup.css";
 import { FaXmark } from "react-icons/fa6";
 const Popup = ({ children, isOpen, setIsOpen, width, height }) => {
