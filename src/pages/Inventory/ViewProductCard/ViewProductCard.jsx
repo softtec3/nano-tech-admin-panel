@@ -3,28 +3,8 @@ import "./viewProductCard.css";
 import Swal from "sweetalert2";
 import Popup from "../../../components/Popup/Popup";
 import { toast } from "react-toastify";
-const ViewProductCard = () => {
+const ViewProductCard = ({ product, handleDelete }) => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const handleDelete = () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success",
-        });
-      }
-    });
-  };
   const [regularPrice, setRegularPrice] = useState(0);
   const [currentPrice, setCurrentPrice] = useState(0);
   const [discount, setDiscount] = useState(0);
@@ -153,6 +133,7 @@ const ViewProductCard = () => {
     handleSections(e);
   };
   //
+
   // product categories
   useEffect(() => {
     try {
@@ -200,7 +181,9 @@ const ViewProductCard = () => {
         {/* product image */}
         <div className="card-image">
           <img
-            src="https://i.ibb.co/mCnR127b/airpurifier.jpg"
+            src={`${import.meta.env.VITE_API}/uploads/products/${
+              product["product_main_img"]
+            }`}
             alt="product title"
           />
         </div>
@@ -208,10 +191,12 @@ const ViewProductCard = () => {
         {/* product description */}
         <div className="productDescription">
           <div className="titleModel">
-            <h6>model</h6>
-            <h5>name</h5>
+            <h6>{product["product_model"] ?? ""}</h6>
+            <h5>{product["product_name_en"] ?? ""}</h5>
           </div>
-          <span className="productPrice">Price: 4552</span>
+          <span className="productPrice">
+            Price: {product["current_price"] ?? ""}
+          </span>
         </div>
         {/* product description */}
         {/* product action buttons */}
@@ -221,7 +206,9 @@ const ViewProductCard = () => {
           </button>
 
           <button
-            onClick={handleDelete}
+            onClick={() => {
+              handleDelete(product["id"]);
+            }}
             className="btn"
             style={{ backgroundColor: "red" }}
           >
