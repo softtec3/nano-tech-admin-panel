@@ -3,31 +3,42 @@ import "./viewProductCard.css";
 import Swal from "sweetalert2";
 import Popup from "../../../components/Popup/Popup";
 import { toast } from "react-toastify";
-const ViewProductCard = ({ product, handleDelete }) => {
+const ViewProductCard = ({ product, handleDelete, getAllProducts }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [regularPrice, setRegularPrice] = useState(0);
-  const [currentPrice, setCurrentPrice] = useState(0);
-  const [discount, setDiscount] = useState(0);
+  const [regularPrice, setRegularPrice] = useState(product?.regular_price);
+  const [currentPrice, setCurrentPrice] = useState(product?.current_price);
+  const [discount, setDiscount] = useState(product?.discount);
   const [allCategories, setAllCategories] = useState([]);
   const [allSubCategories, setSubCategories] = useState([]);
   const [warehouses, setWarehouses] = useState([]);
-  const [warehouseLocation, setWarehouseLocation] = useState("");
+  const [warehouseLocation, setWarehouseLocation] = useState(
+    product?.warehouse_address
+  );
   const [allSections, setAllSections] = useState([]);
   const [allSubsections, setAllSubsections] = useState([]);
-
-  // add product
+  const [productSpecifications, setProductSpecification] = useState([]);
+  // Update product
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
     try {
-      fetch(`${import.meta.env.VITE_API}/add_product.php`, {
-        method: "POST",
-        body: form,
-      })
+      fetch(
+        `${import.meta.env.VITE_API}/update_product.php?product_id=${
+          product?.id
+        }`,
+        {
+          method: "POST",
+          body: form,
+          credentials: "include",
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
+          console.log(data);
           if (data?.success) {
             toast.success(data?.message);
+            getAllProducts();
+            setIsOpen(false);
           } else {
             console.log(data?.message);
             toast.error(data?.message);
@@ -36,8 +47,6 @@ const ViewProductCard = ({ product, handleDelete }) => {
         .catch((error) => console.log(error.message));
     } catch (error) {
       console.log(error.message);
-    } finally {
-      e.target.reset();
     }
   };
   // handle sub categories
@@ -173,6 +182,28 @@ const ViewProductCard = ({ product, handleDelete }) => {
       console.log(error.message);
     }
   }, []);
+  // get all specifications
+  useEffect(() => {
+    try {
+      fetch(
+        `${
+          import.meta.env.VITE_API
+        }/product_specification_by_id.php?product_id=${product?.id}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          if (data?.success) {
+            setProductSpecification(data?.data);
+          }
+          {
+            console.log(data?.message);
+          }
+        })
+        .catch((error) => console.log(error.message));
+    } catch (error) {
+      console.log(error.message);
+    }
+  }, [product?.id]);
 
   return (
     // view product card
@@ -238,12 +269,13 @@ const ViewProductCard = ({ product, handleDelete }) => {
                   {/* form element */}
                   <div className="productFormElement">
                     <label htmlFor="product_name_en">
-                      Product English Name{" "}
+                      Product English Name
                       <span style={{ color: "red" }}>*</span>
                     </label>
                     <input
                       type="text"
                       name="product_name_en"
+                      defaultValue={product?.product_name_en ?? ""}
                       required
                       placeholder="Enter product english name"
                     />
@@ -257,6 +289,7 @@ const ViewProductCard = ({ product, handleDelete }) => {
                     <input
                       type="text"
                       name="product_name_bn"
+                      defaultValue={product?.product_name_bn ?? ""}
                       required
                       placeholder="Enter product bangla name"
                     />
@@ -294,6 +327,7 @@ const ViewProductCard = ({ product, handleDelete }) => {
                         setDiscount(discount);
                         setCurrentPrice(regularPrice - discount);
                       }}
+                      defaultValue={product?.discount ?? 0}
                       required
                       placeholder="Enter product regular price"
                       min={0}
@@ -321,6 +355,7 @@ const ViewProductCard = ({ product, handleDelete }) => {
                     <input
                       type="text"
                       name="product_model"
+                      defaultValue={product?.product_model ?? ""}
                       required
                       placeholder="Enter product model"
                     />
@@ -335,21 +370,22 @@ const ViewProductCard = ({ product, handleDelete }) => {
                       onChange={handleSubCategories}
                       required
                       name="product_category"
-                      id=""
                     >
                       <option value="" style={{ display: "none" }}>
                         Select category
                       </option>
                       {allCategories &&
                         allCategories?.length > 0 &&
-                        allCategories.map((category) => (
-                          <option
-                            key={category?.id}
-                            value={`${category?.id}+${category?.category_name}`}
-                          >
-                            {category?.category_name}
-                          </option>
-                        ))}
+                        allCategories.map((category) => {
+                          return (
+                            <option
+                              key={category?.id}
+                              value={`${category?.id}+${category?.category_name}`}
+                            >
+                              {category?.category_name}
+                            </option>
+                          );
+                        })}
                     </select>
                   </div>
                   <div className="productFormElement">
@@ -479,6 +515,7 @@ const ViewProductCard = ({ product, handleDelete }) => {
                     <input
                       type="number"
                       name="product_quantity"
+                      defaultValue={product?.product_quantity ?? 1}
                       min={1}
                       required
                       placeholder="Enter product quantity"
@@ -493,12 +530,42 @@ const ViewProductCard = ({ product, handleDelete }) => {
                       <option value="" style={{ display: "none" }}>
                         Select warranty
                       </option>
-                      <option value="1">1 year</option>
-                      <option value="2">2 years</option>
-                      <option value="3">3 years</option>
-                      <option value="4">4 years</option>
-                      <option value="5">5 years</option>
-                      <option value="12">12 years</option>
+                      <option
+                        value="1"
+                        selected={product?.product_warranty == "1" && true}
+                      >
+                        1 year
+                      </option>
+                      <option
+                        value="2"
+                        selected={product?.product_warranty == "2" && true}
+                      >
+                        2 years
+                      </option>
+                      <option
+                        value="3"
+                        selected={product?.product_warranty == "3" && true}
+                      >
+                        3 years
+                      </option>
+                      <option
+                        value="4"
+                        selected={product?.product_warranty == "4" && true}
+                      >
+                        4 years
+                      </option>
+                      <option
+                        value="5"
+                        selected={product?.product_warranty == "5" && true}
+                      >
+                        5 years
+                      </option>
+                      <option
+                        value="12"
+                        selected={product?.product_warranty == "12" && true}
+                      >
+                        12 years
+                      </option>
                     </select>
                   </div>
                 </div>
@@ -508,7 +575,16 @@ const ViewProductCard = ({ product, handleDelete }) => {
                     <label htmlFor="product_main_img">
                       Product Main Image <span style={{ color: "red" }}>*</span>
                     </label>
-                    <input type="file" name="product_main_img" required />
+                    <input
+                      type="file"
+                      name="product_main_img"
+                      required={product?.product_main_img ? false : true}
+                    />
+                    <input
+                      type="hidden"
+                      name="pro_main_img"
+                      value={product?.product_main_img}
+                    />
                   </div>
                 </div>
                 <div className="formElementFlex">
@@ -518,12 +594,22 @@ const ViewProductCard = ({ product, handleDelete }) => {
                       Product Other Image 1
                     </label>
                     <input type="file" name="product_img_one" />
+                    <input
+                      type="hidden"
+                      name="pro_img_one"
+                      value={product?.product_img_one}
+                    />
                   </div>
                   <div className="productFormElement">
                     <label htmlFor="product_img_two">
                       Product Other Image 2
                     </label>
                     <input type="file" name="product_img_two" />
+                    <input
+                      type="hidden"
+                      name="pro_img_two"
+                      value={product?.product_img_two}
+                    />
                   </div>
                 </div>
                 <div className="formElementFlex">
@@ -533,12 +619,22 @@ const ViewProductCard = ({ product, handleDelete }) => {
                       Product Other Image 3
                     </label>
                     <input type="file" name="product_img_three" />
+                    <input
+                      type="hidden"
+                      name="pro_img_three"
+                      value={product?.product_img_three}
+                    />
                   </div>
                   <div className="productFormElement">
                     <label htmlFor="product_img_four">
                       Product Other Image 4
                     </label>
                     <input type="file" name="product_img_four" />
+                    <input
+                      type="hidden"
+                      name="pro_img_four"
+                      value={product?.product_img_four}
+                    />
                   </div>
                 </div>
                 {/* form element */}
@@ -550,6 +646,7 @@ const ViewProductCard = ({ product, handleDelete }) => {
                   <textarea
                     name="product_description_en"
                     required
+                    defaultValue={product?.product_description_en ?? ""}
                     placeholder="Enter product english description"
                   ></textarea>
                 </div>
@@ -561,6 +658,7 @@ const ViewProductCard = ({ product, handleDelete }) => {
                   <textarea
                     name="product_description_bn"
                     required
+                    defaultValue={product?.product_description_bn ?? ""}
                     placeholder="Enter product bangla description"
                   ></textarea>
                 </div>
@@ -577,73 +675,93 @@ const ViewProductCard = ({ product, handleDelete }) => {
                   <h3>Product Specification</h3>
                 </div>
                 {/* main container for specification */}
-                <div>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "10px",
-                    }}
-                  >
-                    <div className="formElementFlex">
-                      <div className="productFormElement">
-                        <label htmlFor="sp_name_en">
-                          Specification English Name{" "}
-                          <span style={{ color: "red" }}>*</span>
-                        </label>
-                        <input
-                          type="text"
-                          name="sp_name_en[]"
-                          required
-                          placeholder="Enter product specification english name"
-                        />
-                      </div>
+                {productSpecifications &&
+                  productSpecifications?.length > 0 &&
+                  productSpecifications.map((spec) => {
+                    return (
+                      <div key={spec?.id}>
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: "10px",
+                          }}
+                        >
+                          <div className="formElementFlex">
+                            <input
+                              type="hidden"
+                              name="spec_id[]"
+                              defaultValue={spec?.id ?? 0}
+                            />
+                            <div className="productFormElement">
+                              <label htmlFor="sp_name_en">
+                                Specification English Name
+                                <span style={{ color: "red" }}>*</span>
+                              </label>
+                              <input
+                                type="text"
+                                name="sp_name_en[]"
+                                defaultValue={spec?.specification_name_en ?? ""}
+                                required
+                                placeholder="Enter product specification english name"
+                              />
+                            </div>
 
-                      <div className="productFormElement">
-                        <label htmlFor="sp_desc_en">
-                          Specification English Description{" "}
-                          <span style={{ color: "red" }}>*</span>
-                        </label>
-                        <input
-                          type="text"
-                          name="sp_desc_en[]"
-                          required
-                          placeholder="Enter product specification english description"
-                        />
-                      </div>
-                    </div>
-                    <div className="formElementFlex">
-                      <div className="productFormElement">
-                        <label htmlFor="sp_name_bn">
-                          Specification Bangla Name{" "}
-                          <span style={{ color: "red" }}>*</span>
-                        </label>
-                        <input
-                          type="text"
-                          name="sp_name_bn[]"
-                          required
-                          placeholder="Enter product specification bangla name"
-                        />
-                      </div>
+                            <div className="productFormElement">
+                              <label htmlFor="sp_desc_en">
+                                Specification English Description{" "}
+                                <span style={{ color: "red" }}>*</span>
+                              </label>
+                              <input
+                                type="text"
+                                name="sp_desc_en[]"
+                                defaultValue={
+                                  spec?.specification_description_en ?? ""
+                                }
+                                required
+                                placeholder="Enter product specification english description"
+                              />
+                            </div>
+                          </div>
+                          <div className="formElementFlex">
+                            <div className="productFormElement">
+                              <label htmlFor="sp_name_bn">
+                                Specification Bangla Name{" "}
+                                <span style={{ color: "red" }}>*</span>
+                              </label>
+                              <input
+                                type="text"
+                                name="sp_name_bn[]"
+                                defaultValue={spec?.specification_name_bn ?? ""}
+                                required
+                                placeholder="Enter product specification bangla name"
+                              />
+                            </div>
 
-                      <div className="productFormElement">
-                        <label htmlFor="sp_desc_bn">
-                          Specification Bangla Description
-                          <span style={{ color: "red" }}>*</span>
-                        </label>
-                        <input
-                          type="text"
-                          name="sp_desc_bn[]"
-                          required
-                          placeholder="Enter product specification bangla description"
-                        />
+                            <div className="productFormElement">
+                              <label htmlFor="sp_desc_bn">
+                                Specification Bangla Description
+                                <span style={{ color: "red" }}>*</span>
+                              </label>
+                              <input
+                                type="text"
+                                name="sp_desc_bn[]"
+                                defaultValue={
+                                  spec?.specification_description_bn ?? ""
+                                }
+                                required
+                                placeholder="Enter product specification bangla description"
+                              />
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
+                    );
+                  })}
+
                 <div className="productFormElement">
                   <button type="submit" className="btn">
-                    Add Product
+                    Update Product
                   </button>
                 </div>
               </form>

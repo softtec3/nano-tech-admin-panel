@@ -50,8 +50,9 @@ const Inventory = () => {
       }
     });
   };
+
   // get all products
-  useEffect(() => {
+  const getAllProducts = () => {
     try {
       fetch(`${import.meta.env.VITE_API}/all_products.php`)
         .then((res) => res.json())
@@ -66,6 +67,9 @@ const Inventory = () => {
     } catch (error) {
       console.log(error.message);
     }
+  };
+  useEffect(() => {
+    getAllProducts();
   }, []);
   return (
     // inventory page
@@ -108,6 +112,7 @@ const Inventory = () => {
                 key={product?.id}
                 product={product}
                 handleDelete={handleDelete}
+                getAllProducts={getAllProducts}
               />
             ))}
         </div>
