@@ -87,3 +87,9 @@
   top: 5px;
   cursor: pointer;
 }
+
+@media screen and (max-width: 1300px) {
+  .warehouseContainer {
+    flex-direction: column;
+  }
+}

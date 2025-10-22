@@ -57,6 +57,16 @@ const DashBoardSideBar = ({
               style={{ display: `${isInnerLinkShow ? "block" : "none"}` }}
               className="inventoryInnerLinks"
             >
+              {" "}
+              <li
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
+                <NavLink to={"categories"} end>
+                  Create Category
+                </NavLink>
+              </li>
               <li
                 onClick={(e) => {
                   e.stopPropagation();
@@ -66,7 +76,7 @@ const DashBoardSideBar = ({
                 <NavLink to={"e-commerce"} end>
                   Add Products
                 </NavLink>
-              </li>
+              </li>{" "}
               <li
                 onClick={(e) => {
                   e.stopPropagation();
@@ -86,15 +96,6 @@ const DashBoardSideBar = ({
                 <NavLink to={"orders"} end>
                   {" "}
                   Orders
-                </NavLink>
-              </li>
-              <li
-                onClick={(e) => {
-                  e.stopPropagation();
-                }}
-              >
-                <NavLink to={"categories"} end>
-                  Create Category
                 </NavLink>
               </li>
             </ul>
