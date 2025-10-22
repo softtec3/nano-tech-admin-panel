@@ -10,6 +10,8 @@ const CreateWarehouse = () => {
   const [isShow3, setIsShow3] = useState(false);
   const [allWarehouses, setAllWarehouses] = useState([]);
   const [allSections, setAllSections] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
+  const [staticAllProducts, setStaticAllProducts] = useState([]);
   // Create warehouse
   const handleCreateWarehouse = (e) => {
     e.preventDefault();
@@ -145,6 +147,32 @@ const CreateWarehouse = () => {
   useEffect(() => {
     getAllWarehouses();
   }, []);
+  // Get all products
+  useEffect(() => {
+    try {
+      fetch(`${import.meta.env.VITE_API}/all_products.php`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data?.success) {
+            setAllProducts(data?.data);
+            setStaticAllProducts(data?.data);
+          } else {
+            console.log(data?.message);
+          }
+        })
+        .catch((error) => console.log(error.message));
+    } catch (error) {
+      console.log(error.message);
+    }
+  }, []);
+  // Warehouse specific products filter
+  const handleWarehouseFilter = (e) => {
+    const value = parseInt(e.target.value);
+    const filtered = staticAllProducts.filter(
+      (product) => product.warehouse_id == value
+    );
+    setAllProducts(filtered);
+  };
   return (
     <section id="warehouse">
       {/* warehouses and their products */}
@@ -315,7 +343,7 @@ const CreateWarehouse = () => {
       <div className="warehouseContainer">
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <h2>All Warehouses</h2>
-          <select name="warehouse">
+          <select onChange={handleWarehouseFilter} name="warehouse">
             {/* these will fetch from database */}
             <option value="" style={{ display: "none" }}>
               All warehouses
@@ -369,7 +397,21 @@ const CreateWarehouse = () => {
               <th>Quantity</th>
             </tr>
           </thead>
-          <tbody></tbody>
+          <tbody>
+            {allProducts &&
+              allProducts?.length > 0 &&
+              allProducts.map((product) => {
+                return (
+                  <tr key={product?.id}>
+                    <td>{product?.warehouse_name}</td>
+                    <td>{product?.warehouse_section_name}</td>
+                    <td>{product?.warehouse_sub_section_name}</td>
+                    <td>{product?.product_name_en}</td>
+                    <td>{product?.product_quantity}</td>
+                  </tr>
+                );
+              })}
+          </tbody>
         </table>
       </div>
     </section>

@@ -5,7 +5,7 @@ import { Bounce, toast, ToastContainer } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router";
 const Login = () => {
-  const { loginUser, setUser, user, isLoading } = useAuth();
+  const { loginUser, setUser, user, isLoading, setIsLoading } = useAuth();
   console.log(user);
   console.log(isLoading);
   const navigate = useNavigate();
@@ -18,6 +18,7 @@ const Login = () => {
       .then((data) => {
         if (data.success) {
           setUser(data?.data);
+          setIsLoading(false);
           if (data.data.logged_user_role != "admin") {
             toast.error("Access denied. Only admin have access!");
           } else {
