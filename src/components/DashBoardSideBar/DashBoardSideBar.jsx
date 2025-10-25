@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./dashBoardSideBar.css";
 import { Link, NavLink } from "react-router";
-import { FaTachometerAlt, FaListAlt } from "react-icons/fa";
+import { FaTachometerAlt, FaListAlt, FaImage } from "react-icons/fa";
 import { FaPenFancy, FaVideo, FaComments } from "react-icons/fa";
 
 import {
@@ -11,7 +11,12 @@ import {
   MdPostAdd,
   MdStore,
 } from "react-icons/md";
-import { FaList, FaUserShield, FaWarehouse } from "react-icons/fa6";
+import {
+  FaList,
+  FaRectangleAd,
+  FaUserShield,
+  FaWarehouse,
+} from "react-icons/fa6";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { AiOutlineFileText } from "react-icons/ai";
 const DashBoardSideBar = ({
@@ -157,6 +162,11 @@ const DashBoardSideBar = ({
           <li style={{ fontWeight: "bold" }}>
             <NavLink to={"createRole"}>
               <FaUserShield size={20} /> Create Role
+            </NavLink>
+          </li>
+          <li style={{ fontWeight: "bold" }}>
+            <NavLink to={"banners"}>
+              <FaImage size={20} /> Banners
             </NavLink>
           </li>
           {/* Nav link */}

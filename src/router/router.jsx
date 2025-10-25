@@ -16,6 +16,7 @@ import Comments from "../pages/Comments/Comments";
 import AdminRoute from "../routes/AdminRoute";
 import Forbidden from "../pages/Forbidden/Forbidden";
 import Categories from "../pages/Categories/Categories";
+import Banner from "../pages/Banner/Banner";
 // all routes
 export const router = createBrowserRouter([
   {
@@ -39,6 +40,7 @@ export const router = createBrowserRouter([
       { path: "orders", Component: Orders },
       { path: "categories", Component: Categories },
       { path: "createRole", Component: CreateRole },
+      { path: "banners", Component: Banner },
       { path: "warehouse", Component: CreateWarehouse },
       { path: "productManagement", Component: ProductManagement },
       { path: "productQrCode", Component: ProductQrCode },
