@@ -99,7 +99,6 @@ const ProductManagementTable = () => {
             </thead>
             <tbody>
               {salesPoint?.map((point, index) => {
-                console.log(point?.productIds);
                 return (
                   <tr
                     key={index}
