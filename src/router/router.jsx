@@ -17,6 +17,7 @@ import AdminRoute from "../routes/AdminRoute";
 import Forbidden from "../pages/Forbidden/Forbidden";
 import Categories from "../pages/Categories/Categories";
 import Banner from "../pages/Banner/Banner";
+import SalesPoints from "../pages/SalesPoints/SalesPoints";
 // all routes
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,7 @@ export const router = createBrowserRouter([
       { path: "warehouse", Component: CreateWarehouse },
       { path: "productManagement", Component: ProductManagement },
       { path: "productQrCode", Component: ProductQrCode },
+      { path: "salesPoints", Component: SalesPoints },
       { path: "salesReport", Component: SalesReport },
       { path: "lowStockAlerts", Component: LowStockAlert },
       {

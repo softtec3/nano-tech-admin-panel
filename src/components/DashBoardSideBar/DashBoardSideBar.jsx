@@ -147,6 +147,13 @@ const DashBoardSideBar = ({
                   e.stopPropagation();
                 }}
               >
+                <NavLink to={"salesPoints"}> Sales Points</NavLink>
+              </li>
+              <li
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
                 <NavLink to={"salesReport"}> Sales Report</NavLink>
               </li>
               <li
