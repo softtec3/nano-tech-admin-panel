@@ -13,6 +13,7 @@ const ProductManagement = () => {
   const [categories, setCategories] = useState([]);
   const [allproducts, setAllProducts] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);
+  const [productsSummary, setProductsSummary] = useState([]);
   const handleAvailableIds = (e) => {
     const value = parseInt(e.target.value.split("+")[0]);
 
@@ -59,12 +60,14 @@ const ProductManagement = () => {
     const sales_point_id = data.sales_point.split("+")[0];
     const sales_point_name = data.sales_point.split("+")[1];
     const assign_product_quantity = selectedIds.length;
+    const current_quantity = selectedIds.length;
     const final = {
       product_id,
       product_name,
       sales_point_id,
       sales_point_name,
       assign_product_quantity,
+      current_quantity,
       selectedIds,
     };
     console.log(final);
@@ -160,6 +163,29 @@ const ProductManagement = () => {
     } catch (error) {
       console.log(error.message);
     }
+  }, []);
+  // get products summary
+  const getProductsSummary = () => {
+    try {
+      fetch(
+        `${import.meta.env.VITE_API}/all_sales_points_products_summary.php`,
+        { credentials: "include" }
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          if (data?.success) {
+            setProductsSummary(data?.data);
+          } else {
+            console.log(data?.message);
+          }
+        })
+        .catch((error) => console.log(error.message));
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  useEffect(() => {
+    getProductsSummary();
   }, []);
   return (
     <section id="productManagement">
@@ -313,7 +339,11 @@ const ProductManagement = () => {
         </main>
       </div>
 
-      <ProductManagementTable />
+      <ProductManagementTable
+        productsSummary={productsSummary}
+        setProductsSummary={setProductsSummary}
+        getProductsSummary={getProductsSummary}
+      />
     </section>
   );
 };
