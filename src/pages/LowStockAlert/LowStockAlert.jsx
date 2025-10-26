@@ -1,114 +1,43 @@
 import React, { useEffect, useState } from "react";
 import "./lowStockAlert.css";
-// this is dummy data. Its should be fetched from database
-const lowStockData = [
-  {
-    sellerId: "S001",
-    shopName: "Tech World",
-    shopLocation: "Dhaka",
-    productName: "Wireless Mouse",
-    providedQty: 100,
-    soldQty: 92,
-    remainingQty: 8,
-  },
-  {
-    sellerId: "S001",
-    shopName: "Tech World",
-    shopLocation: "Dhaka",
-    productName: "Mechanical Keyboard",
-    providedQty: 50,
-    soldQty: 45,
-    remainingQty: 5,
-  },
-  {
-    sellerId: "S002",
-    shopName: "Home Essentials",
-    shopLocation: "Chittagong",
-    productName: "Electric Kettle",
-    providedQty: 60,
-    soldQty: 52,
-    remainingQty: 8,
-  },
-  {
-    sellerId: "S002",
-    shopName: "Home Essentials",
-    shopLocation: "Chittagong",
-    productName: "Rice Cooker",
-    providedQty: 70,
-    soldQty: 65,
-    remainingQty: 5,
-  },
-  {
-    sellerId: "S003",
-    shopName: "Fashion Hub",
-    shopLocation: "Sylhet",
-    productName: "Leather Wallet",
-    providedQty: 80,
-    soldQty: 75,
-    remainingQty: 5,
-  },
-  {
-    sellerId: "S003",
-    shopName: "Fashion Hub",
-    shopLocation: "Sylhet",
-    productName: "Sneakers",
-    providedQty: 40,
-    soldQty: 37,
-    remainingQty: 3,
-  },
-  {
-    sellerId: "S004",
-    shopName: "Gadget Arena",
-    shopLocation: "Rajshahi",
-    productName: "Smartwatch",
-    providedQty: 60,
-    soldQty: 59,
-    remainingQty: 1,
-  },
-  {
-    sellerId: "S004",
-    shopName: "Gadget Arena",
-    shopLocation: "Rajshahi",
-    productName: "Bluetooth Speaker",
-    providedQty: 30,
-    soldQty: 28,
-    remainingQty: 2,
-  },
-  {
-    sellerId: "S005",
-    shopName: "Kitchen King",
-    shopLocation: "Khulna",
-    productName: "Non-stick Pan",
-    providedQty: 40,
-    soldQty: 36,
-    remainingQty: 4,
-  },
-  {
-    sellerId: "S005",
-    shopName: "Kitchen King",
-    shopLocation: "Khulna",
-    productName: "Pressure Cooker",
-    providedQty: 25,
-    soldQty: 22,
-    remainingQty: 3,
-  },
-];
 
 const LowStockAlert = () => {
+  const [productsSummary, setProductsSummary] = useState([]);
+  const [staticProductsSummary, setStaticProductSummary] = useState([]);
   // handle search functionality
   const [searchQuery, setSearchQuery] = useState("");
-  const [salesPoint, setSalesPoint] = useState(lowStockData);
-  const [shopData, setShopData] = useState({ shopName: "", shopLocation: "" });
+
   const handleSearch = (e) => {
     e.preventDefault();
-    setSalesPoint(lowStockData.filter((data) => data.sellerId === searchQuery));
-  };
-  useEffect(() => {
-    salesPoint.forEach((data) =>
-      setShopData({ shopName: data.shopName, shopLocation: data.shopLocation })
+    setProductsSummary(
+      staticProductsSummary.filter((pro) => pro?.sales_point_id == searchQuery)
     );
-  }, [salesPoint]);
+  };
 
+  // products summary function
+  const getProductsSummary = () => {
+    try {
+      fetch(
+        `${import.meta.env.VITE_API}/all_sales_points_products_summary.php`,
+        { credentials: "include" }
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          if (data?.success) {
+            setProductsSummary(data?.data);
+            setStaticProductSummary(data?.data);
+          } else {
+            console.log(data?.message);
+          }
+        });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  // get products summary of sales points
+  useEffect(() => {
+    getProductsSummary();
+  }, []);
   return (
     // sales point section
     <section id="salesPoint">
@@ -122,52 +51,63 @@ const LowStockAlert = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 type="text"
-                placeholder="Enter Shop ID"
+                placeholder="Enter SP ID"
               />
               <button type="submit">Search</button>
+              <button
+                type="button"
+                onClick={() => {
+                  setSearchQuery("");
+                  getProductsSummary();
+                }}
+                style={{ backgroundColor: "red", marginLeft: "5px" }}
+              >
+                Reset
+              </button>
             </form>
           </div>
-          {shopData && (
-            <div className="flex" style={{ gap: "10px" }}>
-              <div>
-                <b>Shop: </b>
-                {shopData.shopName}
-              </div>
-              <div>
-                <b>Address: </b>
-                {shopData.shopLocation}
-              </div>
-            </div>
-          )}
         </div>
         <div id="salesPointTableContainer">
           <table>
             <thead>
               <tr>
-                <th>Seller ID</th>
-                <th>Shop Name</th>
+                <th>SP ID</th>
+                <th>SP Name</th>
+                <th>Product ID</th>
                 <th>Product Name</th>
-                <th>Provided Quantity</th>
+                <th>Assign Quantity</th>
                 <th>Sold Quantity</th>
                 <th>Remaining Quantity</th>
+                <th>Assign Date</th>
               </tr>
             </thead>
             <tbody>
-              {salesPoint?.map((point, index) => (
-                <tr
-                  key={index}
-                  style={{
-                    backgroundColor: `${point.remainingQty <= 5 && "red"}`,
-                  }}
-                >
-                  <td>{point?.sellerId}</td>
-                  <td>{point?.shopName}</td>
-                  <td>{point?.productName}</td>
-                  <td>{point?.providedQty}</td>
-                  <td>{point?.soldQty}</td>
-                  <td>{point?.remainingQty}</td>
-                </tr>
-              ))}
+              {productsSummary &&
+                productsSummary?.length > 0 &&
+                productsSummary?.map((summary) => {
+                  return (
+                    <tr
+                      key={summary?.id}
+                      style={{
+                        backgroundColor: `${
+                          summary?.current_quantity <= 5 && "red"
+                        }`,
+                      }}
+                    >
+                      <td>{summary?.sales_point_id}</td>
+                      <td>{summary?.sales_point_name}</td>
+                      <td>{summary?.product_id}</td>
+                      <td>{summary?.product_name}</td>
+                      <td>{summary?.assign_products_quantity}</td>
+                      <td>
+                        {summary?.assign_products_quantity -
+                          summary?.current_quantity}
+                      </td>
+                      <td>{summary?.current_quantity}</td>
+                      <td>{summary?.assign_date}</td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </div>

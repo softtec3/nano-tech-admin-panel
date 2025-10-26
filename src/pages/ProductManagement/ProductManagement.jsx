@@ -87,6 +87,7 @@ const ProductManagement = () => {
           console.log(data);
           if (data?.success) {
             toast.success(data?.message);
+            getProductsSummary();
           } else {
             toast.error(data?.message);
           }
