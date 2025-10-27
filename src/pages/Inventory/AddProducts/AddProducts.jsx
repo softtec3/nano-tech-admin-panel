@@ -337,16 +337,27 @@ const AddProducts = ({ setActive }) => {
                 />
               </div>
               <div className="productFormElement">
-                <label htmlFor="product_model">
-                  Product Model <span style={{ color: "red" }}>*</span>
+                <label htmlFor="delivery_charge">
+                  Delivery Charge <span style={{ color: "red" }}>*</span>
                 </label>
                 <input
-                  type="text"
-                  name="product_model"
+                  type="number"
+                  name="delivery_charge"
                   required
-                  placeholder="Enter product model"
+                  placeholder="Enter delivery charge"
                 />
               </div>
+            </div>
+            <div className="productFormElement">
+              <label htmlFor="product_model">
+                Product Model <span style={{ color: "red" }}>*</span>
+              </label>
+              <input
+                type="text"
+                name="product_model"
+                required
+                placeholder="Enter product model"
+              />
             </div>
             <div className="formElementFlex">
               <div className="productFormElement">

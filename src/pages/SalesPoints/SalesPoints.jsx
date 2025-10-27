@@ -184,6 +184,7 @@ const SalesPoints = () => {
           <table>
             <thead>
               <tr>
+                <th>SP ID</th>
                 <th>SP Name</th>
                 <th>Location</th>
                 <th>Owner</th>
@@ -199,6 +200,7 @@ const SalesPoints = () => {
                 salesPoints.map((point) => {
                   return (
                     <tr key={point?.id}>
+                      <td>{point?.id}</td>
                       <td>{point?.name}</td>
                       <td>{point?.location}</td>
                       <td>{point?.owner_name}</td>
