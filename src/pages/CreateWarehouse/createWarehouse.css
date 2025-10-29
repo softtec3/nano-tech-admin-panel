@@ -37,7 +37,9 @@
 }
 #salesPointTableContainer {
   max-height: 70vh;
-  overflow: auto;
+  min-width: 100%;
+  max-width: 800px;
+  overflow-x: auto;
   position: relative;
 }
 #salesPointTableContainer table thead {

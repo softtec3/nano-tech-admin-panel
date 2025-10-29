@@ -29,7 +29,8 @@
 }
 #salesPointTableContainer {
   margin-top: 20px;
-  width: 100%;
+  min-width: 100%;
+  max-width: 800px;
   overflow-x: auto;
   border-radius: 5px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.221);

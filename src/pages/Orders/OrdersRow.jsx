@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
-const OrdersRow = ({ order = {} }) => {
+const OrdersRow = ({ order = {}, getAllOrders }) => {
   const [orderDetails, setOrderDetails] = useState([]);
-
+  // get order products details
   useEffect(() => {
     try {
       fetch(
@@ -24,10 +25,35 @@ const OrdersRow = ({ order = {} }) => {
       console.log(error);
     }
   }, [order]);
-  console.log(order);
-  console.log(orderDetails);
+  // handle order status
+  const handleOrderStatus = (e) => {
+    const status = e.target.value;
+    const order_id = order.id;
+    try {
+      fetch(
+        `${
+          import.meta.env.VITE_API
+        }/update_order_status.php?order_id=${order_id}&status=${status}`,
+        { credentials: "include" }
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          if (data?.success) {
+            toast.success(data?.message);
+            getAllOrders();
+          } else {
+            toast.error("Something went wrong. Check console");
+            console.log(data?.message);
+          }
+        })
+        .catch((error) => console.log(error.message));
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <tr>
+      <td>#{order?.id}</td>
       <td>{orderDetails?.user?.full_name}</td>
       <td>{orderDetails?.user?.mobile_number}</td>
       <td>
@@ -47,7 +73,7 @@ const OrdersRow = ({ order = {} }) => {
       </td>
       <td>{order?.total_amount} TK</td>
       <td>
-        <select defaultValue={order?.order_status}>
+        <select onChange={handleOrderStatus} defaultValue={order?.order_status}>
           <option value="pending">Pending</option>
           <option value="confirmed">Confirmed</option>
           <option value="shipped">Shipped</option>
@@ -55,6 +81,8 @@ const OrdersRow = ({ order = {} }) => {
           <option value="rejected">Rejected</option>
         </select>
       </td>
+      <td>{order?.created_at.split(" ").join(" | ")}</td>
+      <td>{order?.updated_at.split(" ").join(" | ")}</td>
     </tr>
   );
 };

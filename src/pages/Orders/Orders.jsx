@@ -8,8 +8,12 @@ const Orders = () => {
   const [allOrders, setAllOrders] = useState([]);
   const handleFilter = (e) => {
     const filter = e.target.value;
+    if (filter === "all") {
+      setOrders(allOrders);
+      return;
+    }
     setOrders(
-      allOrders.filter((order) => order.status.toLowerCase() === filter)
+      allOrders.filter((order) => order?.order_status.toLowerCase() === filter)
     );
   };
   // get orders function
@@ -45,6 +49,7 @@ const Orders = () => {
           <option value="" style={{ display: "none" }}>
             Filter By
           </option>
+          <option value="all">All</option>
           <option value="pending">Pending</option>
           <option value="confirmed">Confirmed</option>
           <option value="shipped">Shipped</option>
@@ -54,21 +59,36 @@ const Orders = () => {
       </div>
       {/* Orders table */}
       <div id="salesPointTableContainer">
-        <table>
+        <table style={{ width: "1850px" }}>
           <thead>
             <tr>
+              <th>Order ID</th>
               <th>Name</th>
               <th>Phone</th>
               <th>Location</th>
               <th>Product & Quantity</th>
               <th>Price</th>
               <th>Status</th>
+              <th>Order Time</th>
+              <th>Update Time</th>
             </tr>
           </thead>
           <tbody>
-            {orders?.map((order) => (
-              <OrdersRow key={order?.id} order={order} />
-            ))}
+            {orders &&
+              orders.length > 0 &&
+              orders?.map((order) => (
+                <OrdersRow
+                  key={order?.id}
+                  order={order}
+                  setOrders={setOrders}
+                  getAllOrders={getAllOrders}
+                />
+              ))}
+            {orders?.length <= 0 && (
+              <tr>
+                <td colSpan={12}>No data found</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
