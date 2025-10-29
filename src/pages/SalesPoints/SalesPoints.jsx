@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 const SalesPoints = () => {
   const [isShow, setIsShow] = useState(false);
   const [salesPoints, setSalesPoints] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
   //   create sales point
   const handleCreateSalesPoint = (e) => {
     e.preventDefault();
@@ -83,6 +84,26 @@ const SalesPoints = () => {
   useEffect(() => {
     getSalesPoints();
   }, []);
+  // fetch all users
+  useEffect(() => {
+    try {
+      fetch(`${import.meta.env.VITE_API}/all_general_users.php`, {
+        credentials: "include",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data?.success) {
+            setAllUsers(data?.data);
+          } else {
+            console.log(data?.message);
+          }
+        })
+        .catch((error) => console.log(error.message));
+    } catch (error) {
+      console.log(error.message);
+    }
+  }, []);
+  console.log(allUsers);
   return (
     <div>
       <section id="warehouse">
@@ -119,6 +140,23 @@ const SalesPoints = () => {
                   name="location"
                   placeholder="Enter sales point location"
                 />
+              </div>
+              <div className="formElement">
+                <label htmlFor="user_id">
+                  Select User <span style={{ color: "red" }}>*</span>
+                </label>
+                <select name="user_id" id="" required>
+                  <option value="" style={{ display: "none" }}>
+                    Select a user
+                  </option>
+                  {allUsers &&
+                    allUsers?.length > 0 &&
+                    allUsers?.map((user) => (
+                      <option key={user?.id} value={user?.id}>
+                        {user?.id}-{user?.full_name}
+                      </option>
+                    ))}
+                </select>
               </div>
               <div className="formElement">
                 <label htmlFor="owner_name">
