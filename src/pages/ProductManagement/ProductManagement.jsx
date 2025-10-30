@@ -99,6 +99,7 @@ const ProductManagement = () => {
       setIsShow(false);
       setAvailableIds([]);
       setSelectedIds([]);
+      setProductQuantity(0);
     }
   };
   const handleCategoryProduct = (e) => {
