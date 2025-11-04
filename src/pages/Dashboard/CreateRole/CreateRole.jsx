@@ -12,7 +12,6 @@ const CreateRole = () => {
       setPassError("Confirm password not matched");
     } else {
       setPassError("");
-      console.log(data);
       fetch(`${import.meta.env.VITE_API}/create_user.php`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

@@ -9,7 +9,6 @@ const SalesReport = () => {
   const [totalSales, setTotalSales] = useState(0);
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log(searchQuery);
     const filteredProducts = staticSalesPoint.filter(
       (point) => point.sales_point_id == searchQuery
     );
@@ -20,7 +19,6 @@ const SalesReport = () => {
     //   setShopData({ shopName: data.shopName, shopLocation: data.shopLocation })
     // );
     const totalSalesPrice = salesPoint.reduce((sum, item) => {
-      console.log(item);
       return sum + item.payable_amount;
     }, 0);
     setTotalSales(totalSalesPrice);
@@ -61,7 +59,6 @@ const SalesReport = () => {
       console.log(error.message);
     }
   }, []);
-  console.log(salesPoint);
   return (
     // sales point section
     <section id="salesPoint">

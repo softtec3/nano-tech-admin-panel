@@ -34,7 +34,6 @@ const ViewProductCard = ({ product, handleDelete, getAllProducts }) => {
       )
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           if (data?.success) {
             toast.success(data?.message);
             getAllProducts();
@@ -194,8 +193,7 @@ const ViewProductCard = ({ product, handleDelete, getAllProducts }) => {
         .then((data) => {
           if (data?.success) {
             setProductSpecification(data?.data);
-          }
-          {
+          } else {
             console.log(data?.message);
           }
         })
@@ -539,46 +537,19 @@ const ViewProductCard = ({ product, handleDelete, getAllProducts }) => {
                     <label htmlFor="product_warranty">
                       Product Warranty <span style={{ color: "red" }}>*</span>
                     </label>
-                    <select name="product_warranty" id="">
-                      <option value="" style={{ display: "none" }}>
+                    <select
+                      name="product_warranty"
+                      defaultValue={product?.product_warranty || ""}
+                    >
+                      <option value="" disabled hidden>
                         Select warranty
                       </option>
-                      <option
-                        value="1"
-                        selected={product?.product_warranty == "1" && true}
-                      >
-                        1 year
-                      </option>
-                      <option
-                        value="2"
-                        selected={product?.product_warranty == "2" && true}
-                      >
-                        2 years
-                      </option>
-                      <option
-                        value="3"
-                        selected={product?.product_warranty == "3" && true}
-                      >
-                        3 years
-                      </option>
-                      <option
-                        value="4"
-                        selected={product?.product_warranty == "4" && true}
-                      >
-                        4 years
-                      </option>
-                      <option
-                        value="5"
-                        selected={product?.product_warranty == "5" && true}
-                      >
-                        5 years
-                      </option>
-                      <option
-                        value="12"
-                        selected={product?.product_warranty == "12" && true}
-                      >
-                        12 years
-                      </option>
+                      <option value="1">1 year</option>
+                      <option value="2">2 years</option>
+                      <option value="3">3 years</option>
+                      <option value="4">4 years</option>
+                      <option value="5">5 years</option>
+                      <option value="12">12 years</option>
                     </select>
                   </div>
                 </div>

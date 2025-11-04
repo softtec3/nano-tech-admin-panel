@@ -70,7 +70,6 @@ const ProductManagement = () => {
       current_quantity,
       selectedIds,
     };
-    console.log(final);
     if (selectedIds.length == 0) {
       toast.error("Please select ids");
       return;
@@ -84,7 +83,6 @@ const ProductManagement = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           if (data?.success) {
             toast.success(data?.message);
             getProductsSummary();

@@ -29,9 +29,9 @@ const CreateWarehouse = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           if (data?.success) {
             toast.success(data?.message);
+            getAllWarehouses();
           } else {
             console.log(data?.message);
           }
@@ -67,7 +67,6 @@ const CreateWarehouse = () => {
   const handleCreateSection = (e) => {
     e.preventDefault();
     const formData = getFormData(e.target);
-    console.log(formData);
     try {
       fetch(`${import.meta.env.VITE_API}/create_warehouse_section.php`, {
         method: "POST",

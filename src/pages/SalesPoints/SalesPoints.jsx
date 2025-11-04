@@ -56,7 +56,6 @@ const SalesPoints = () => {
 
   // Change status of sales point
   const handleStatus = (status, id, user_id) => {
-    console.log(status, id, user_id);
     try {
       fetch(
         `${
@@ -103,7 +102,6 @@ const SalesPoints = () => {
       console.log(error.message);
     }
   }, []);
-  console.log(allUsers);
   return (
     <div>
       <section id="warehouse">

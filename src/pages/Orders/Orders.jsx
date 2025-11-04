@@ -40,7 +40,6 @@ const Orders = () => {
   useEffect(() => {
     getAllOrders();
   }, []);
-  console.log(orders);
   return (
     <section>
       <div className="ordersTop">

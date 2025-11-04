@@ -5,9 +5,8 @@ import { Bounce, toast, ToastContainer } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router";
 const Login = () => {
-  const { loginUser, setUser, user, isLoading, setIsLoading } = useAuth();
-  console.log(user);
-  console.log(isLoading);
+  const { loginUser, setUser, setIsLoading } = useAuth();
+
   const navigate = useNavigate();
   // form submission
   const handleSubmit = (e) => {
