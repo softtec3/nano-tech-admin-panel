@@ -14,6 +14,7 @@ import {
 import {
   FaList,
   FaRectangleAd,
+  FaUsers,
   FaUserShield,
   FaWarehouse,
 } from "react-icons/fa6";
@@ -181,6 +182,12 @@ const DashBoardSideBar = ({
             <NavLink to={"warehouse"}>
               <FaWarehouse size={18} />
               Warehouse
+            </NavLink>
+          </li>
+          <li style={{ fontWeight: "bold" }}>
+            <NavLink to={"users"}>
+              <FaUsers size={18} />
+              Users
             </NavLink>
           </li>
           <li>

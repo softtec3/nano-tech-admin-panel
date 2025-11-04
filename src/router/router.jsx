@@ -18,6 +18,7 @@ import Forbidden from "../pages/Forbidden/Forbidden";
 import Categories from "../pages/Categories/Categories";
 import Banner from "../pages/Banner/Banner";
 import SalesPoints from "../pages/SalesPoints/SalesPoints";
+import Users from "../pages/Users/Users";
 // all routes
 export const router = createBrowserRouter([
   {
@@ -43,6 +44,7 @@ export const router = createBrowserRouter([
       { path: "createRole", Component: CreateRole },
       { path: "banners", Component: Banner },
       { path: "warehouse", Component: CreateWarehouse },
+      { path: "users", Component: Users },
       { path: "productManagement", Component: ProductManagement },
       { path: "productQrCode", Component: ProductQrCode },
       { path: "salesPoints", Component: SalesPoints },
