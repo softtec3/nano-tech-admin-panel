@@ -26,22 +26,22 @@ const SalesReport = () => {
     setTotalSales(totalSalesPrice);
   }, [salesPoint]);
   // filter
-  const handleFilter = (e) => {
-    const value = e.target.value;
-    switch (value) {
-      case "this_week":
-        console.log("week");
-        break;
-      case "this_month":
-        console.log("month");
-        break;
-      case "this_Year":
-        console.log("year");
-        break;
-      default:
-        console.log("all");
-    }
-  };
+  // const handleFilter = (e) => {
+  //   const value = e.target.value;
+  //   switch (value) {
+  //     case "this_week":
+  //       console.log("week");
+  //       break;
+  //     case "this_month":
+  //       console.log("month");
+  //       break;
+  //     case "this_Year":
+  //       console.log("year");
+  //       break;
+  //     default:
+  //       console.log("all");
+  //   }
+  // };
   // fetching sales points order
   useEffect(() => {
     try {
@@ -105,12 +105,12 @@ const SalesReport = () => {
         {/* sales points report table */}
         <div className="salesPointSummary">
           <h4>Total Sales: {totalSales} TK</h4>
-          <select onChange={handleFilter} name="filter">
+          {/* <select onChange={handleFilter} name="filter">
             <option value="all">Filter (All)</option>
             <option value="this_week">This week</option>
             <option value="this_month">This month</option>
             <option value="this_Year">This Year</option>
-          </select>
+          </select> */}
         </div>
         <div id="salesPointTableContainer">
           <table>

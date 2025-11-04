@@ -226,6 +226,9 @@ const ViewProductCard = ({ product, handleDelete, getAllProducts }) => {
           <span className="productPrice">
             Price: {product["current_price"] ?? ""}
           </span>
+          <span className="productPrice">
+            Quantity: {product["product_quantity"] ?? ""}
+          </span>
         </div>
         {/* product description */}
         {/* product action buttons */}

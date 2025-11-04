@@ -55,13 +55,13 @@ const SalesPoints = () => {
   };
 
   // Change status of sales point
-  const handleStatus = (status, id) => {
-    console.log(status, id);
+  const handleStatus = (status, id, user_id) => {
+    console.log(status, id, user_id);
     try {
       fetch(
         `${
           import.meta.env.VITE_API
-        }/change_sales_points_status.php?status=${status}&sales_point_id=${id}`,
+        }/change_sales_points_status.php?status=${status}&sales_point_id=${id}&user_id=${user_id}`,
         { credentials: "include" }
       )
         .then((res) => res.json())
@@ -251,7 +251,11 @@ const SalesPoints = () => {
                         {point?.status == "active" ? (
                           <button
                             onClick={() => {
-                              handleStatus("inactive", point?.id);
+                              handleStatus(
+                                "inactive",
+                                point?.id,
+                                point?.user_id
+                              );
                             }}
                             className="btn-table"
                             style={{ backgroundColor: "red" }}
@@ -261,7 +265,7 @@ const SalesPoints = () => {
                         ) : (
                           <button
                             onClick={() => {
-                              handleStatus("active", point?.id);
+                              handleStatus("active", point?.id, point?.user_id);
                             }}
                             className="btn-table"
                             style={{ marginRight: "5px" }}

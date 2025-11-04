@@ -1,7 +1,7 @@
 .productCard {
   border: 1px solid gainsboro;
-  min-height: 320px;
-  max-height: 320px;
+  min-height: 350px;
+  max-height: 350px;
   border-radius: 3px;
   /* padding-top: 10px; */
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
