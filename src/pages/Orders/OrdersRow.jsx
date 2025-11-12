@@ -72,6 +72,8 @@ const OrdersRow = ({ order = {}, getAllOrders }) => {
         </select>
       </td>
       <td>{order?.total_amount} TK</td>
+      <td style={{ textTransform: "capitalize" }}>{order?.payment_method}</td>
+      <td style={{ textTransform: "capitalize" }}>{order?.payment_status}</td>
       <td>
         <select onChange={handleOrderStatus} defaultValue={order?.order_status}>
           <option value="pending">Pending</option>

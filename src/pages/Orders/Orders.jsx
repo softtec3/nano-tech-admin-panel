@@ -6,6 +6,7 @@ import OrdersRow from "./OrdersRow";
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [allOrders, setAllOrders] = useState([]);
+  const [transactions, setTransactions] = useState([]);
   const handleFilter = (e) => {
     const filter = e.target.value;
     if (filter === "all") {
@@ -36,9 +37,29 @@ const Orders = () => {
       console.log(error);
     }
   };
+  // get orders function
+  const getAllTransactions = () => {
+    try {
+      fetch(`${import.meta.env.VITE_API}/all_transactions.php`, {
+        credentials: "include",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data?.success) {
+            setTransactions(data?.data);
+          } else {
+            console.log(data?.message);
+          }
+        })
+        .catch((error) => console.log(error?.message));
+    } catch (error) {
+      console.log(error);
+    }
+  };
   // fetching all orders
   useEffect(() => {
     getAllOrders();
+    getAllTransactions();
   }, []);
   return (
     <section>
@@ -58,7 +79,7 @@ const Orders = () => {
       </div>
       {/* Orders table */}
       <div id="salesPointTableContainer">
-        <table style={{ width: "1850px" }}>
+        <table style={{ width: "2050px" }}>
           <thead>
             <tr>
               <th>Order ID</th>
@@ -67,6 +88,8 @@ const Orders = () => {
               <th>Location</th>
               <th>Product & Quantity</th>
               <th>Price</th>
+              <th>Payment Method</th>
+              <th>Payment Status</th>
               <th>Status</th>
               <th>Order Time</th>
               <th>Update Time</th>
@@ -88,6 +111,40 @@ const Orders = () => {
                 <td colSpan={12}>No data found</td>
               </tr>
             )}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Transactions */}
+      <div className="ordersTop" style={{ marginTop: "20px" }}>
+        <h2>Transactions</h2>
+      </div>
+      {/* Orders table */}
+      <div id="salesPointTableContainer">
+        <table style={{ width: "100%" }}>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Order ID</th>
+              <th>Txn ID</th>
+              <th>Merchant Invoice</th>
+              <th>Amount</th>
+              <th>Txn Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {transactions &&
+              transactions?.length > 0 &&
+              transactions?.map((trans) => (
+                <tr key={trans?.id}>
+                  <td>{trans?.id}</td>
+                  <td>{trans?.order_id}</td>
+                  <td>{trans?.txn_id}</td>
+                  <td>{trans?.merchant_invoice}</td>
+                  <td>{trans?.amount} TK</td>
+                  <td>{trans?.txn_date}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
